@@ -88,6 +88,13 @@ if __name__ == "__main__":
 
     test_model(test_loader)
     
+    # 可视化模型
+    # 获取一个批处理数据样本
+    features, _ = next(iter(train_loader))
+    outputs = model(features)
+    dot = make_dot(outputs, params=dict(list(model.named_parameters()) + [('features', features)]))
+    dot.render('./Images/ModelImageForEnIntelligibilityTransformer', format='png')
+    
     sys.stdout.close()
     
     sys.stdout = sys.__stdout__
